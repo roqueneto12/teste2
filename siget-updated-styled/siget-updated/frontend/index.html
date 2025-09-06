@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SiGeT - Sistema de Gerenciamento de Testes</title>
+    
+    <!-- Meta tags para SEO -->
+    <meta name="description" content="Sistema completo de gerenciamento de testes com quadro Kanban, controle de usuários e relatórios.">
+    <meta name="keywords" content="testes, gerenciamento, kanban, qualidade, software">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧪</text></svg>">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/siget-style.css">
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <p>Carregando...</p>
+    </div>
+
+    <!-- Header -->
+    <header class="header-container">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="header">
+                    <a href="/">🧪 SiGeT</a>
+                </h1>
+                
+                <!-- Navigation -->
+                <nav class="menu" id="main-menu">
+                    <a href="#" class="menu-link" data-page="home">Início</a>
+                    <a href="#" class="menu-link" data-page="about">Sobre</a>
+                    <a href="#" class="menu-link" data-page="features">Funcionalidades</a>
+                </nav>
+
+                <!-- Auth Buttons / User Menu -->
+                <div class="auth-section">
+                    <!-- Buttons for non-authenticated users -->
+                    <div class="auth-buttons" id="auth-buttons">
+                        <button class="btn btn-secondary" id="login-btn">Entrar</button>
+                        <button class="btn btn-primary" id="admin-login-btn">Admin</button>
+                    </div>
+
+                    <!-- User menu for authenticated users -->
+                    <div class="user-menu" id="user-menu" style="display: none;">
+                        <button class="user-avatar" id="user-avatar">
+                            <span class="user-name" id="user-name"></span>
+                            <span class="user-role" id="user-role"></span>
+                            <span>▼</span>
+                        </button>
+                        <div class="dropdown-menu" id="user-dropdown">
+                            <a href="#" class="dropdown-item" data-page="dashboard">
+                                📊 Dashboard
+                            </a>
+                            <a href="#" class="dropdown-item" data-page="profile" id="profile-link">
+                                👤 Perfil
+                            </a>
+                            <hr class="dropdown-divider">
+                            <button class="dropdown-item" id="logout-btn">
+                                🚪 Sair
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Home Page -->
+        <div id="home-page" class="page active">
+            <!-- Hero Banner -->
+            <section class="hero-banner">
+                <div class="container">
+                    <div class="hero-content">
+                        <h2 class="hero-title">Sistema de Gerenciamento de Testes</h2>
+                        <p class="hero-description">
+                            Gerencie seus casos de teste de forma visual e eficiente com nosso quadro Kanban. 
+                            Controle de usuários, relatórios e muito mais!
+                        </p>
+                        <div class="hero-actions">
+                            <button class="btn btn-primary btn-large" id="get-started-btn">Começar Agora</button>
+                            <button class="btn btn-secondary btn-large" data-page="about">Saiba Mais</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section class="features-section">
+                <div class="container">
+                    <h2 class="section-title">🚀 Principais Funcionalidades</h2>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">📋</div>
+                            <h3>Quadro Kanban</h3>
+                            <p>Visualize e gerencie seus casos de teste com arrastar e soltar</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">👥</div>
+                            <h3>Gestão de Usuários</h3>
+                            <p>Controle completo de usuários, funções e permissões</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">📊</div>
+                            <h3>Relatórios</h3>
+                            <p>Acompanhe o progresso com relatórios detalhados</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🔒</div>
+                            <h3>Segurança</h3>
+                            <p>Sistema seguro com autenticação e controle de acesso</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- About Page -->
+        <div id="about-page" class="page">
+            <section class="about-section">
+                <div class="container">
+                    <h2 class="section-title">Sobre o SiGeT</h2>
+                    <div class="about-content">
+                        <p>O SiGeT é um sistema completo de gerenciamento de testes desenvolvido para facilitar o trabalho de equipes de QA e desenvolvimento. Com uma interface moderna e intuitiva, permite organizar casos de teste de forma visual através de um quadro Kanban.</p>
+                        
+                        <h3>Por que escolher o SiGeT?</h3>
+                        <ul>
+                            <li>Interface moderna e responsiva</li>
+                            <li>Quadro Kanban com drag-and-drop</li>
+                            <li>Gestão completa de usuários e empresas</li>
+                            <li>Relatórios e estatísticas detalhadas</li>
+                            <li>Sistema de permissões flexível</li>
+                            <li>Itens de teste pré-cadastrados</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Features Page -->
+        <div id="features-page" class="page">
+            <section class="features-detail-section">
+                <div class="container">
+                    <h2 class="section-title">Funcionalidades Detalhadas</h2>
+                    
+                    <div class="feature-detail">
+                        <h3>🎯 Quadro Kanban Interativo</h3>
+                        <p>Organize seus casos de teste em colunas personalizáveis: A Fazer, Em Progresso, Testando, Concluído e Bloqueado. Mova cartões facilmente com arrastar e soltar.</p>
+                    </div>
+                    
+                    <div class="feature-detail">
+                        <h3>👨‍💼 Painel Administrativo</h3>
+                        <p>Administradores podem gerenciar empresas, usuários e itens de teste. Controle total sobre permissões e acesso ao sistema.</p>
+                    </div>
+                    
+                    <div class="feature-detail">
+                        <h3>🏢 Gestão Multi-Empresa</h3>
+                        <p>Suporte para múltiplas empresas com isolamento completo de dados. Cada empresa tem seus próprios usuários e casos de teste.</p>
+                    </div>
+                    
+                    <div class="feature-detail">
+                        <h3>📋 Itens de Teste Pré-cadastrados</h3>
+                        <p>Biblioteca de casos de teste comuns para agilizar o processo de criação. Inclui testes funcionais, de performance, segurança e usabilidade.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Dashboard Page (Company) -->
+        <div id="dashboard-page" class="page">
+            <section class="dashboard-section">
+                <div class="container">
+                    <h2 class="section-title">Dashboard da Empresa</h2>
+                    <div id="company-dashboard">
+                        <!-- Dashboard content will be loaded here -->
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Admin Dashboard Page -->
+        <div id="admin-dashboard-page" class="page">
+            <section class="admin-dashboard-section">
+                <div class="container">
+                    <h2 class="section-title">Painel Administrativo</h2>
+                    <div id="admin-dashboard">
+                        <!-- Admin dashboard content will be loaded here -->
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Profile Page -->
+        <div id="profile-page" class="page">
+            <section class="profile-section">
+                <div class="container">
+                    <h2 class="section-title">Perfil</h2>
+                    <div class="profile-content" id="profile-content">
+                        <!-- Profile content will be loaded here -->
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SiGeT</h3>
+                    <p>Sistema de Gerenciamento de Testes completo e moderno para equipes de desenvolvimento.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Navegação</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" data-page="home">Início</a></li>
+                        <li><a href="#" data-page="about">Sobre</a></li>
+                        <li><a href="#" data-page="features">Funcionalidades</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Suporte</h3>
+                    <div class="contact-info">
+                        <p>📧 suporte@siget.com</p>
+                        <p>💬 Suporte técnico</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 SiGeT. Todos os direitos reservados.</p>
+                <p>Desenvolvido com ❤️ para equipes de QA</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Entrar como Empresa</h3>
+                <button class="modal-close" id="login-modal-close">✕</button>
+            </div>
+            <div class="modal-body">
+                <form class="auth-form" id="login-form">
+                    <div class="form-group">
+                        <label class="form-label">Email:</label>
+                        <input type="email" class="form-input" id="login-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Senha:</label>
+                        <div class="password-input">
+                            <input type="password" class="form-input" id="login-password" required>
+                            <button type="button" class="password-toggle" id="login-password-toggle">👁️</button>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Entrar</button>
+                </form>
+                <div class="auth-footer">
+                    Não tem uma conta? 
+                    <button class="link-btn" id="show-register">Registre sua empresa</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="register-modal" class="modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Registrar Empresa</h3>
+                <button class="modal-close" id="register-modal-close">✕</button>
+            </div>
+            <div class="modal-body">
+                <form class="auth-form" id="register-form">
+                    <div class="form-group">
+                        <label class="form-label">Nome da Empresa:</label>
+                        <input type="text" class="form-input" id="register-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">CNPJ:</label>
+                        <input type="text" class="form-input" id="register-cnpj" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email:</label>
+                        <input type="email" class="form-input" id="register-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Senha:</label>
+                        <div class="password-input">
+                            <input type="password" class="form-input" id="register-password" required>
+                            <button type="button" class="password-toggle" id="register-password-toggle">👁️</button>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Registrar</button>
+                </form>
+                <div class="auth-footer">
+                    Já tem uma conta? 
+                    <button class="link-btn" id="show-login">Fazer login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div id="admin-login-modal" class="modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Login Administrativo</h3>
+                <button class="modal-close" id="admin-login-modal-close">✕</button>
+            </div>
+            <div class="modal-body">
+                <form class="auth-form" id="admin-login-form">
+                    <div class="form-group">
+                        <label class="form-label">Email:</label>
+                        <input type="email" class="form-input" id="admin-login-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Senha:</label>
+                        <div class="password-input">
+                            <input type="password" class="form-input" id="admin-login-password" required>
+                            <button type="button" class="password-toggle" id="admin-login-password-toggle">👁️</button>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Entrar como Admin</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- JavaScript -->
+    <script src="assets/js/siget-app.js"></script>
+    <script src="assets/js/siget-auth.js"></script>
+    <script src="assets/js/siget-admin.js"></script>
+</body>
+</html>
+
